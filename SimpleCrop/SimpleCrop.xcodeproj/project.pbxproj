@@ -11,6 +11,8 @@
 		DC8BDAC4222A2498006E1D3D /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAC3222A2498006E1D3D /* CropViewController.swift */; };
 		DC8BDAC9222A2499006E1D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8BDAC8222A2499006E1D3D /* Assets.xcassets */; };
 		DC8BDACC222A2499006E1D3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8BDACA222A2499006E1D3D /* LaunchScreen.storyboard */; };
+		DC8BDAD4222A45D9006E1D3D /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAD3222A45D9006E1D3D /* PreviewView.swift */; };
+		DC8BDAD6222A46C1006E1D3D /* SLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAD5222A46C1006E1D3D /* SLayoutConstraint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		DC8BDAC8222A2499006E1D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC8BDACB222A2499006E1D3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC8BDACD222A2499006E1D3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC8BDAD3222A45D9006E1D3D /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		DC8BDAD5222A46C1006E1D3D /* SLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLayoutConstraint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				DC8BDAC1222A2498006E1D3D /* AppDelegate.swift */,
+				DC8BDAD3222A45D9006E1D3D /* PreviewView.swift */,
+				DC8BDAD5222A46C1006E1D3D /* SLayoutConstraint.swift */,
 				DC8BDAC3222A2498006E1D3D /* CropViewController.swift */,
 				DC8BDAC8222A2499006E1D3D /* Assets.xcassets */,
 				DC8BDACA222A2499006E1D3D /* LaunchScreen.storyboard */,
@@ -131,8 +137,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8BDAD6222A46C1006E1D3D /* SLayoutConstraint.swift in Sources */,
 				DC8BDAC4222A2498006E1D3D /* CropViewController.swift in Sources */,
 				DC8BDAC2222A2498006E1D3D /* AppDelegate.swift in Sources */,
+				DC8BDAD4222A45D9006E1D3D /* PreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

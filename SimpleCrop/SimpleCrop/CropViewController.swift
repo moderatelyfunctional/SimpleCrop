@@ -11,12 +11,37 @@ import AVFoundation
 
 class CropViewController: UIViewController {
 
+    let captureSession = AVCaptureSession()
+    let previewView = PreviewView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.view.backgroundColor = UIColor.green
+        self.view.addSubview(self.previewView)
+        addConstraints()
+    }
+    
+    func addConstraints() {
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .bottom, .right], padding: 0))
+    }
+    
+    func configureSession() {
+        self.captureSession.beginConfiguration()
+        let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
         
+        guard
+            let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
+            self.captureSession.canAddInput(videoDeviceInput)
+            else { return }
+        
+        self.captureSession.addInput(videoDeviceInput)
+        
+        let photoOutput = AVCapturePhotoOutput()
+        guard captureSession.canAddOutput(photoOutput) else { return }
+        captureSession.sessionPreset = .photo
+        captureSession.addOutput(photoOutput)
+        self.captureSession.commitConfiguration()
     }
     
     func checkAuthorizationStatus() {
