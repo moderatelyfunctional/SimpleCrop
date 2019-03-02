@@ -100,17 +100,6 @@ class PhotoViewController: UIViewController {
         UIImageWriteToSavedPhotosAlbum(croppedImage, self, #selector(PhotoViewController.finishedSavingImage), nil)
     }
     
-    func otherCrop(_ image: UIImage, cropRect: CGRect) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(cropRect.size, false, image.scale)
-        image.draw(at: CGPoint(x: -cropRect.origin.x, y: -cropRect.origin.y))
-        let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
-        return croppedImage!
-    }
-    
-    func rad(_ degree: Double) -> CGFloat {
-        return CGFloat(degree / 180.0 * .pi)
-    }
-    
     @objc func finishedSavingImage(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         let alert = UIAlertController(title: "Saved your photo.", message: "SimpleCrop saved your photo to the albums", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay.", style: .default, handler: nil))
@@ -123,13 +112,10 @@ class PhotoViewController: UIViewController {
         let height = abs(self.touchEndPoint.y - self.touchStartPoint.y)
         
         let min_x = min(self.touchStartPoint.x, self.touchEndPoint.x)
-        let min_y = min(self.touchStartPoint.y, self.touchStartPoint.y)
+        let min_y = min(self.touchStartPoint.y, self.touchEndPoint.y)
         
         self.cropView.bounds = CGRect(x: 0, y: 0, width: width, height: height)
-        
-        let y_down:CGFloat = self.touchStartPoint.y > self.touchEndPoint.y ? -1.0 : 1.0
-        
-        self.cropView.center = CGPoint(x: min_x + width / 2, y: min_y + y_down * height / 2)
+        self.cropView.center = CGPoint(x: min_x + width / 2, y: min_y + height / 2)
     }
     
 }

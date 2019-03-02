@@ -94,7 +94,7 @@ class CropViewController: UIViewController {
         let photoSettings = AVCapturePhotoSettings()
         photoSettings.isAutoStillImageStabilizationEnabled = true
         photoSettings.isHighResolutionPhotoEnabled = true
-        photoSettings.flashMode = .auto
+        photoSettings.flashMode = .on
         
         self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
