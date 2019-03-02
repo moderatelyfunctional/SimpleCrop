@@ -21,6 +21,7 @@ class CropViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.photoButton.addTarget(self, action: #selector(CropViewController.takePhoto), for: .touchUpInside)
+        self.view.accessibilityLabel = "SIMPLE CROP"
         
         self.view.addSubview(self.previewView)
         self.previewView.accessibilityLabel = "CAMERA FEED"
