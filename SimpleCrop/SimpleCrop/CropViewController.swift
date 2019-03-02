@@ -11,15 +11,19 @@ import AVFoundation
 
 class CropViewController: UIViewController {
 
-    let captureSession = AVCaptureSession()
     let previewView = PreviewView()
-    let takePhoto = SimpleView(text: "Take Photo")
+    let photoButton = SimpleView(text: "Take Photo")
+    
+    let captureSession = AVCaptureSession()
+    let photoOutput = AVCapturePhotoOutput()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.photoButton.addTarget(self, action: #selector(CropViewController.takePhoto), for: .touchUpInside)
+        
         self.view.addSubview(self.previewView)
-        self.view.addSubview(self.takePhoto)
+        self.view.addSubview(self.photoButton)
         addConstraints()
         
         checkAuthorizationStatus()
@@ -28,8 +32,8 @@ class CropViewController: UIViewController {
     func addConstraints() {
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .right], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.previewView, heightRatio: 0.84))
-        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.takePhoto, sides: [.bottom, .left, .right], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.takePhoto, heightRatio: 0.16))
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoButton, sides: [.bottom, .left, .right], padding: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.photoButton, heightRatio: 0.16))
     }
     
     func checkAuthorizationStatus() {
@@ -66,10 +70,11 @@ class CropViewController: UIViewController {
         
         self.captureSession.addInput(videoDeviceInput)
         
-        let photoOutput = AVCapturePhotoOutput()
-        guard captureSession.canAddOutput(photoOutput) else { return }
+        guard captureSession.canAddOutput(self.photoOutput) else { return }
         captureSession.sessionPreset = .photo
-        captureSession.addOutput(photoOutput)
+        captureSession.addOutput(self.photoOutput)
+        self.photoOutput.isHighResolutionCaptureEnabled = true
+        
         self.captureSession.commitConfiguration()
     }
     
@@ -82,8 +87,33 @@ class CropViewController: UIViewController {
         DispatchQueue.main.async {
             self.captureSession.startRunning()
         }
-        
     }
-
+    
+    @objc func takePhoto() {
+        let photoSettings = AVCapturePhotoSettings()
+        photoSettings.isAutoStillImageStabilizationEnabled = true
+        photoSettings.isHighResolutionPhotoEnabled = true
+        photoSettings.flashMode = .auto
+        
+        self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
+    }
 }
 
+extension CropViewController: AVCapturePhotoCaptureDelegate {
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let _ = error {
+            return
+        }
+        guard let imageData = photo.fileDataRepresentation() else {
+            return
+        }
+        guard let currPhoto = UIImage(data: imageData) else {
+            return
+        }
+        
+        let photoViewController = PhotoViewController(photo: currPhoto)
+        self.present(photoViewController, animated: true, completion: nil)
+    }
+    
+}
