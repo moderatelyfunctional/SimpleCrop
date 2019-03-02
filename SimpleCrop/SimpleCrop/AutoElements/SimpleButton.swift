@@ -15,7 +15,7 @@ class SimpleButton: UIButton {
         case Reject
     }
     
-    init(text: String) {
+    init(text: String, font: UIFont) {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -26,32 +26,11 @@ class SimpleButton: UIButton {
         self.backgroundColor = Cons.primaryBackground
     }
     
-    init(action: Action) {
-        super.init(frame: .zero)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        let yes = "ACCEPT"
-        let no = "REJECT"
-        
-        if action == .Accept {
-            //self.setImage(UIImage(named: "check"), for: .normal)
-            
-            self.setTitle(yes, for: .normal)
-            self.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .regular)
-            self.setTitleColor(Cons.primaryColor, for: .normal)
-            
-            self.backgroundColor = UIColor.green
-        } else {
-            //self.setImage(UIImage(named: "cross"), for: .normal)
-            
-            self.setTitle(no, for: .normal)
-            self.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .regular)
-            self.setTitleColor(Cons.primaryBackground, for: .normal)
-            
-            self.backgroundColor = UIColor.red
-        }
-        self.imageView?.contentMode = .scaleAspectFit
-        self.imageEdgeInsets = UIEdgeInsets(top: 20, left: 40, bottom: 20, right: 40)
+    convenience init(text: String) {
+        let font = UIFont.systemFont(ofSize: 48, weight: .regular)
+        self.init(text: text, font: font)
     }
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

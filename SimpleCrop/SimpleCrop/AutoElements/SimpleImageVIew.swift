@@ -14,6 +14,7 @@ class SimpleImageView: UIImageView {
         super.init(image: image)
         
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.contentMode = .scaleAspectFit
     }
     
     required init?(coder aDecoder: NSCoder) {

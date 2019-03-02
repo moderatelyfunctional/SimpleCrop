@@ -12,23 +12,12 @@ class PhotoViewController: UIViewController {
     
     let photoView:SimpleImageView
     let photoContainer = SimpleScrollView(height: 0.84)
-    let acceptButton = SimpleButton(action: .Accept)
-    let rejectButton = SimpleButton(action: .Reject)
-    
-    var activeCrop = false
-    let cropView = SimpleView()
-    var touchStartPoint = CGPoint(x: 0, y: 0)
-    var touchEndPoint = CGPoint(x: 0, y: 0)
-    var cropRect = CGRect.zero
+    let takePhotoButton = SimpleButton(text: "Take Photo", font: UIFont.systemFont(ofSize: 30))
     
     init() {
         self.photoView = SimpleImageView(image: UIImage(named: "test"))
 
         super.init(nibName: nil, bundle: nil)
-        
-        let touchRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PhotoViewController.cropImage))
-        self.photoView.isUserInteractionEnabled = true
-        self.photoView.addGestureRecognizer(touchRecognizer)
     }
     
     init(photo: UIImage) {
@@ -36,25 +25,6 @@ class PhotoViewController: UIViewController {
         
         self.photoView = SimpleImageView(image: inverted_photo)
         super.init(nibName: nil, bundle: nil)
-
-        let touchRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PhotoViewController.cropImage))
-        self.photoView.isUserInteractionEnabled = true
-        self.photoView.addGestureRecognizer(touchRecognizer)
-    }
-        
-    @objc func cropImage(_ sender:UIPanGestureRecognizer) {
-        let position = sender.location(in: self.photoView)
-        
-        if sender.state == .began {
-            self.touchStartPoint = position
-            self.cropView.show()
-        } else if sender.state == .changed {
-            self.touchEndPoint = position
-            moveCropView()
-        } else if sender.state == .ended {
-            self.activeCrop = true
-            moveCropView()
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,78 +36,34 @@ class PhotoViewController: UIViewController {
         
         self.photoContainer.delegate = self
         
-        self.rejectButton.addTarget(self, action: #selector(PhotoViewController.rejectPhoto), for: .touchUpInside)
-        self.acceptButton.addTarget(self, action: #selector(PhotoViewController.acceptPhoto), for: .touchUpInside)
+        self.takePhotoButton.addTarget(self, action: #selector(PhotoViewController.takeAnotherPhoto), for: .touchUpInside)
         
         self.photoContainer.addSubview(self.photoView)
         self.view.addSubview(self.photoContainer)
-        self.view.addSubview(self.acceptButton)
-        self.view.addSubview(self.rejectButton)
-        self.view.addSubview(self.cropView)
+        self.view.addSubview(self.takePhotoButton)
         
-        self.photoView.accessibilityLabel = "DO YOU WANT TO CROP THE IMAGE?"
-        self.photoView.accessibilityHint = "Drag your finger on the screen from the top-left to the bottom-right region that you want to crop."
+        self.photoContainer.accessibilityLabel = "DO YOU WANT TO ZOOM IN THE IMAGE?"
+        self.photoContainer.accessibilityHint = "Drag two fingers apart to zoom in on various parts of the image."
         
-        self.acceptButton.accessibilityLabel = "ACCEPT BUTTON ON RIGHT"
-        self.acceptButton.accessibilityHint = "Click to save the crop"
-        
-        self.rejectButton.accessibilityLabel = "REJECT BUTTON ON LEFT"
-        self.rejectButton.accessibilityHint = "Click to cancel and crop again"
+        self.takePhotoButton.accessibilityLabel = "TAKE ANOTHER PHOTO"
+        self.takePhotoButton.accessibilityHint = "TAP HERE"
         addConstraints()
     }
     
     func addConstraints() {
         self.photoContainer.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoView, sides: [.left, .top, .right, .bottom], padding: 0))
         
-        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.rejectButton, sides: [.left, .bottom], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.rejectButton, heightRatio: 0.16))
-        self.view.addConstraint(SConstraint.fillXConstraints(view: self.rejectButton, widthRatio: 0.5))
+        self.photoContainer.addConstraint(SConstraint.fillXConstraints(view: self.photoView, widthRatio: 1.0))
+        self.photoContainer.addConstraint(SConstraint.fillYConstraints(view: self.photoView, heightRatio: 1.0))
         
-        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.acceptButton, sides: [.right, .bottom], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.acceptButton, heightRatio: 0.16))
-        self.view.addConstraint(SConstraint.fillXConstraints(view: self.acceptButton, widthRatio: 0.5))
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.takePhotoButton, sides: [.left, .bottom, .right], padding: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.takePhotoButton, heightRatio: 0.16))
     }
     
-    @objc func rejectPhoto() {
+    @objc func takeAnotherPhoto() {
         // rejectPhoto behaves differently depending on whether there's an active crop selection
-        if (!self.activeCrop) { // dismiss the PhotoViewController is there is no active crop
-            self.dismiss(animated: true, completion: nil)
-        }
+        self.dismiss(animated: true, completion: nil)
         // remove the active crop here
-        self.activeCrop = false
-        self.cropView.hide()
-        self.cropView.bounds = .zero
-    }
-    
-    @objc func acceptPhoto() {
-        // acceptPhoto only crops the photo and saves it if there is an active crop.
-        if (!self.activeCrop) {
-            return
-        }
-
-        guard let croppedImage = self.photoView.image!.crop(toRect: self.cropView.frame, viewWidth: self.photoView.bounds.width, viewHeight: self.photoView.bounds.height) else {
-            return
-        }
-        
-        UIImageWriteToSavedPhotosAlbum(croppedImage, self, #selector(PhotoViewController.finishedSavingImage), nil)
-    }
-    
-    @objc func finishedSavingImage(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        let alert = UIAlertController(title: "Saved your photo.", message: "SimpleCrop saved your photo to the albums", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay.", style: .default, handler: nil))
-        
-        self.present(alert, animated: true)
-    }
-
-    func moveCropView() {
-        let width = abs(self.touchEndPoint.x - self.touchStartPoint.x)
-        let height = abs(self.touchEndPoint.y - self.touchStartPoint.y)
-        
-        let min_x = min(self.touchStartPoint.x, self.touchEndPoint.x)
-        let min_y = min(self.touchStartPoint.y, self.touchEndPoint.y)
-        
-        self.cropView.bounds = CGRect(x: 0, y: 0, width: width, height: height)
-        self.cropView.center = CGPoint(x: min_x + width / 2, y: min_y + height / 2)
     }
     
 }

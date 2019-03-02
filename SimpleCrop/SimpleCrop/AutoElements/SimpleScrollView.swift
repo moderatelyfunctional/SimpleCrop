@@ -20,6 +20,9 @@ class SimpleScrollView: UIScrollView {
         self.alwaysBounceVertical = false
         self.alwaysBounceHorizontal = false
         
+        self.contentInset = .zero
+        
+        self.zoomScale = 1.0
         self.minimumZoomScale = 1.0
         self.maximumZoomScale = 10.0
         
