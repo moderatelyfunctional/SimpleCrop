@@ -18,6 +18,7 @@ class PhotoViewController: UIViewController {
     let cropView = SimpleView()
     var touchStartPoint = CGPoint(x: 0, y: 0)
     var touchEndPoint = CGPoint(x: 0, y: 0)
+    var cropRect = CGRect.zero
     
     init(photo: UIImage) {
         self.photoView = SimpleImageView(image: photo)
@@ -57,7 +58,7 @@ class PhotoViewController: UIViewController {
         super.viewDidLoad()
         
         self.rejectButton.addTarget(self, action: #selector(PhotoViewController.rejectPhoto), for: .touchUpInside)
-        self.acceptButton.addTarget(self, action: #selector(PhotoViewController.acceptPhoto), for: .touchUpInside)
+        self.acceptButton.addTarget(self, action: #selector(PhotoViewController.finishedSavingImage), for: .touchUpInside)
         
         self.view.addSubview(self.photoView)
         self.view.addSubview(self.acceptButton)
@@ -85,6 +86,9 @@ class PhotoViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
         // remove the active crop here
+        self.activeCrop = false
+        self.cropView.hide()
+        self.cropView.bounds = .zero
     }
     
     @objc func acceptPhoto() {
@@ -93,6 +97,18 @@ class PhotoViewController: UIViewController {
             return
         }
         // crop and then save the image
+        guard let croppedImage = self.photoView.image?.crop(rect: self.cropRect) else {
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(croppedImage, self, #selector(PhotoViewController.finishedSavingImage), nil)
+    }
+    
+    @objc func finishedSavingImage() {
+        let alert = UIAlertController(title: "Saved your photo!", message: "SimpleCrop saved your photo to the albums", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay.", style: .default, handler: nil))
+        
+        self.present(alert, animated: true)
     }
 
     func moveCropView() {
@@ -107,6 +123,8 @@ class PhotoViewController: UIViewController {
         let y_down:CGFloat = self.touchStartPoint.y > self.touchEndPoint.y ? -1.0 : 1.0
         
         self.cropView.center = CGPoint(x: min_x + width / 2, y: min_y + y_down * height / 2)
+        
+        self.cropRect = CGRect(x: min_x, y: min_y, width: width, height: height)
     }
     
 }

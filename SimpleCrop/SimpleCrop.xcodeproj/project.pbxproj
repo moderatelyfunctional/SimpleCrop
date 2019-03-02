@@ -15,7 +15,7 @@
 		DC8BDAD6222A46C1006E1D3D /* SConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAD5222A46C1006E1D3D /* SConstraint.swift */; };
 		DC8BDAD8222A4CAA006E1D3D /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAD7222A4CAA006E1D3D /* SimpleButton.swift */; };
 		DC8BDADA222A4CE0006E1D3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAD9222A4CE0006E1D3D /* Constants.swift */; };
-		DC8BDADC222A4DBB006E1D3D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDADB222A4DBB006E1D3D /* Colors.swift */; };
+		DC8BDADC222A4DBB006E1D3D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDADB222A4DBB006E1D3D /* Extensions.swift */; };
 		DC8BDADE222A5EC0006E1D3D /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDADD222A5EC0006E1D3D /* PhotoViewController.swift */; };
 		DC8BDAE0222A6098006E1D3D /* SimpleImageVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDADF222A6098006E1D3D /* SimpleImageVIew.swift */; };
 		DC8BDAE5222A701B006E1D3D /* SimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAE4222A701B006E1D3D /* SimpleView.swift */; };
@@ -32,7 +32,7 @@
 		DC8BDAD5222A46C1006E1D3D /* SConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SConstraint.swift; sourceTree = "<group>"; };
 		DC8BDAD7222A4CAA006E1D3D /* SimpleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButton.swift; sourceTree = "<group>"; };
 		DC8BDAD9222A4CE0006E1D3D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		DC8BDADB222A4DBB006E1D3D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		DC8BDADB222A4DBB006E1D3D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DC8BDADD222A5EC0006E1D3D /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		DC8BDADF222A6098006E1D3D /* SimpleImageVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleImageVIew.swift; sourceTree = "<group>"; };
 		DC8BDAE4222A701B006E1D3D /* SimpleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleView.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 				DC8BDAC1222A2498006E1D3D /* AppDelegate.swift */,
 				DC8BDAE1222A60D5006E1D3D /* AutoElements */,
 				DC8BDAD3222A45D9006E1D3D /* PreviewView.swift */,
-				DC8BDADB222A4DBB006E1D3D /* Colors.swift */,
+				DC8BDADB222A4DBB006E1D3D /* Extensions.swift */,
 				DC8BDAD9222A4CE0006E1D3D /* Constants.swift */,
 				DC8BDAD5222A46C1006E1D3D /* SConstraint.swift */,
 				DC8BDAC3222A2498006E1D3D /* CropViewController.swift */,
@@ -168,7 +168,7 @@
 				DC8BDAE5222A701B006E1D3D /* SimpleView.swift in Sources */,
 				DC8BDAE0222A6098006E1D3D /* SimpleImageVIew.swift in Sources */,
 				DC8BDAD8222A4CAA006E1D3D /* SimpleButton.swift in Sources */,
-				DC8BDADC222A4DBB006E1D3D /* Colors.swift in Sources */,
+				DC8BDADC222A4DBB006E1D3D /* Extensions.swift in Sources */,
 				DC8BDAC2222A2498006E1D3D /* AppDelegate.swift in Sources */,
 				DC8BDADE222A5EC0006E1D3D /* PhotoViewController.swift in Sources */,
 				DC8BDAD4222A45D9006E1D3D /* PreviewView.swift in Sources */,
