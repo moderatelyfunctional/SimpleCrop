@@ -43,7 +43,6 @@ extension UIImage {
         
         // Return image to UIImage
         let croppedImage:UIImage = UIImage(cgImage: cutImageRef, scale: self.scale, orientation: self.imageOrientation)
-//        let croppedImage: UIImage = UIImage(cgImage: cutImageRef, scale: self.scale, Orientation)
         return croppedImage
     }
 }
