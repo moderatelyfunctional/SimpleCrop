@@ -45,7 +45,7 @@ class SimpleButton: UIButton {
             
             self.setTitle(no, for: .normal)
             self.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .regular)
-            self.setTitleColor(Cons.primaryColor, for: .normal)
+            self.setTitleColor(Cons.primaryBackground, for: .normal)
             
             self.backgroundColor = UIColor.red
         }
