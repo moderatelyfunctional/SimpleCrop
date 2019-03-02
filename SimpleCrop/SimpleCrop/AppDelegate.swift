@@ -15,9 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let cropViewController = CropViewController()
+//        let cropViewController = CropViewController()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = cropViewController
+//        self.window?.rootViewController = cropViewController
+        self.window?.rootViewController = PhotoViewController()
         self.window?.makeKeyAndVisible()
         
         return true
