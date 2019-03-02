@@ -28,7 +28,7 @@ extension UIImage {
 //    centeredRect = NSIntegralRect(centeredRect);
 //    [output drawInRect:centeredRect fromRect:NSRectFromCGRect([output extent]) operation:NSCompositeSourceOut fraction:0.75f];
 
-    func invertColors() -> UIImage {
+    func invertColors() -> UIImage { //processes colors, doesn't actually invert them
         let ciContext = CIContext(options: nil)
         let coreImage = CIImage(image: self, options: [CIImageOption.colorSpace: NSNull()])
 

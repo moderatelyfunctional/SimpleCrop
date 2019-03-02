@@ -29,13 +29,24 @@ class SimpleButton: UIButton {
     init(action: Action) {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
-        
+        let yes = "ACCEPT"
+        let no = "REJECT"
         
         if action == .Accept {
-            self.setImage(UIImage(named: "check"), for: .normal)
+            //self.setImage(UIImage(named: "check"), for: .normal)
+            
+            self.setTitle(yes, for: .normal)
+            self.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .regular)
+            self.setTitleColor(Cons.primaryColor, for: .normal)
+            
             self.backgroundColor = UIColor.green
         } else {
-            self.setImage(UIImage(named: "cross"), for: .normal)
+            //self.setImage(UIImage(named: "cross"), for: .normal)
+            
+            self.setTitle(no, for: .normal)
+            self.titleLabel!.font = UIFont.systemFont(ofSize: 30, weight: .regular)
+            self.setTitleColor(Cons.primaryColor, for: .normal)
+            
             self.backgroundColor = UIColor.red
         }
         self.imageView?.contentMode = .scaleAspectFit

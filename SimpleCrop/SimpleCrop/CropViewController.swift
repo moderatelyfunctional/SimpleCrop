@@ -23,7 +23,10 @@ class CropViewController: UIViewController {
         self.photoButton.addTarget(self, action: #selector(CropViewController.takePhoto), for: .touchUpInside)
         
         self.view.addSubview(self.previewView)
+        self.previewView.accessibilityLabel = "CAMERA FEED"
+        
         self.view.addSubview(self.photoButton)
+        self.photoButton.accessibilityLabel = "TAKE A PHOTO"
         addConstraints()
         
         checkAuthorizationStatus()

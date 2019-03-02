@@ -70,6 +70,15 @@ class PhotoViewController: UIViewController {
         self.view.addSubview(self.acceptButton)
         self.view.addSubview(self.rejectButton)
         self.view.addSubview(self.cropView)
+        
+        self.photoView.accessibilityLabel = "DO YOU WANT TO CROP THE IMAGE?"
+        self.photoView.accessibilityHint = "Drag your finger on the screen from the top-left to the bottom-right region that you want to crop."
+        
+        self.acceptButton.accessibilityLabel = "ACCEPT BUTTON ON RIGHT"
+        self.acceptButton.accessibilityHint = "Click to save the crop"
+        
+        self.rejectButton.accessibilityLabel = "REJECT BUTTON ON LEFT"
+        self.rejectButton.accessibilityHint = "Click to cancel and crop gain"
         addConstraints()
     }
     
