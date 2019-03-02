@@ -11,6 +11,8 @@ import UIKit
 class PhotoViewController: UIViewController {
     
     let photoView:SimpleImageView
+    let acceptButton = SimpleButton(action: .Accept)
+    let rejectButton = SimpleButton(action: .Reject)
     
     init(photo: UIImage) {
         self.photoView = SimpleImageView(image: photo)
@@ -25,12 +27,22 @@ class PhotoViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.addSubview(self.photoView)
+        self.view.addSubview(self.acceptButton)
+        self.view.addSubview(self.rejectButton)
         addConstraints()
     }
     
     func addConstraints() {
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoView, sides: [.left, .top, .right], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.photoView, heightRatio: 0.8))
+        
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.rejectButton, sides: [.left, .bottom], padding: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.rejectButton, heightRatio: 0.2))
+        self.view.addConstraint(SConstraint.fillXConstraints(view: self.rejectButton, widthRatio: 0.5))
+        
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.acceptButton, sides: [.right, .bottom], padding: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.rejectButton, heightRatio: 0.2))
+        self.view.addConstraint(SConstraint.fillXConstraints(view: self.rejectButton, widthRatio: 0.5))
     }
     
 }

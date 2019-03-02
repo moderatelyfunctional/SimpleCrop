@@ -12,7 +12,7 @@ import AVFoundation
 class CropViewController: UIViewController {
 
     let previewView = PreviewView()
-    let photoButton = SimpleView(text: "Take Photo")
+    let photoButton = SimpleButton(text: "Take Photo")
     
     let captureSession = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()

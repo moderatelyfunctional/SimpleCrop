@@ -1,5 +1,5 @@
 //
-//  SimpleView.swift
+//  SimpleButton.swift
 //  SimpleCrop
 //
 //  Created by Jing Lin on 3/2/19.
@@ -8,8 +8,13 @@
 
 import UIKit
 
-class SimpleView: UIButton {
-        
+class SimpleButton: UIButton {
+    
+    enum Action {
+        case Accept
+        case Reject
+    }
+    
     init(text: String) {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -18,6 +23,21 @@ class SimpleView: UIButton {
         self.titleLabel!.font = UIFont.systemFont(ofSize: 48, weight: .regular)
         
         self.setTitleColor(Cons.primaryColor, for: .normal)
+        self.backgroundColor = Cons.primaryBackground
+    }
+    
+    init(action: Action) {
+        super.init(frame: .zero)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        if action == .Accept {
+            self.setImage(UIImage(named: "check"), for: .normal)
+        } else {
+            self.setImage(UIImage(named: "cross"), for: .normal)
+        }
+        self.imageView?.contentMode = .scaleAspectFit
+        
         self.backgroundColor = Cons.primaryBackground
     }
     
