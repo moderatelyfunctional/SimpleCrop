@@ -13,6 +13,8 @@ struct Cons {
     static let primaryColor = UIColor.white
     static let primaryBackground = UIColor.black
     
-    static let cropColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+    static let thresholdStart:Float = 0.24
+    
+    static let secondaryColor = UIColor(red: 77.0 / 255, green: 184.0 / 255, blue: 246.0 / 255, alpha: 1)
     static let screen_bounds = UIScreen.main.bounds
 }

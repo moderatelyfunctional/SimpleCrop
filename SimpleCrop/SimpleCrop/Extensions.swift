@@ -9,59 +9,14 @@ import UIKit
 
 extension UIImage {
     
-//    CIFilter* filter = [CIFilter filterWithName:@"CIColorInvert"];
-//    [filter setDefaults];
-//    [filter setValue:ciImage forKey:@"inputImage"];
-//    CIImage* output = [filter valueForKey:@"outputImage"];
-//
-//    NSRect centeredRect = NSMakeRect(0, 0, 0, 0);
-//    centeredRect = NSMakeRect(0, 0, [drawnImage size].width, [drawnImage size].height);
-//
-//    // align left if we have a title
-//    if(self.attributedTitle) {
-//    centeredRect.origin.x = 2;
-//    }
-//    else
-//    centeredRect.origin.x = NSMidX([self bounds]) - ([drawnImage size].width / 2);
-//
-//    centeredRect.origin.y = NSMidY([self bounds]) - ([drawnImage size].height / 2) - 1;
-//    centeredRect = NSIntegralRect(centeredRect);
-//    [output drawInRect:centeredRect fromRect:NSRectFromCGRect([output extent]) operation:NSCompositeSourceOut fraction:0.75f];
-
-    func invertColors() -> UIImage { //processes colors, doesn't actually invert them
+    func invertColors(threshold: Float) -> UIImage { //processes colors, doesn't actually invert them
         let ciContext = CIContext(options: nil)
         let coreImage = CIImage(image: self, options: [CIImageOption.colorSpace: NSNull()])
-
-//        let invertFilter = CIFilter(name: "CIColorInvert")!
-//        invertFilter.setValue(coreImage, forKey: "inputImage")
-//        let invertedImage = invertFilter.value(forKeyPath: "outputImage") as! CIImage
-//        let filteredImageRef = ciContext.createCGImage(invertedImage, from: invertedImage.extent)
-        
-//        let colorFilter = CIFilter(name: "CIColorControls")!
-//        colorFilter.setValue(coreImage, forKey: "inputImage")
-//        colorFilter.setValue(0.75, forKey: "inputContrast")
-//        let colorImage = colorFilter.value(forKeyPath: "outputImage") as! CIImage
-//        let filteredImageRef = ciContext.createCGImage(colorImage, from: colorImage.extent)
-        
-//        let sharpenFilter = CIFilter(name: "CISharpenLuminance")!
-//        sharpenFilter.setValue(coreImage, forKey: "inputImage")
-//        sharpenFilter.setValue(1.0, forKey: "inputSharpness")
-//        let sharpenedImage = sharpenFilter.value(forKeyPath: "outputImage") as! CIImage
-//        let sharpenedImageRef = ciContext.createCGImage(sharpenedImage, from: sharpenedImage.extent)
-
-        let blurFilter = CIFilter(name: "CIGaussianBlur")!
-        blurFilter.setValue(coreImage, forKey: "inputImage")
-        blurFilter.setValue(10, forKey: "inputRadius")
-        let blurImage = blurFilter.value(forKeyPath: "outputImage") as! CIImage
-//        let blurImageRef = ciContext.createCGImage(blurImage, from: blurImage.extent)
         
         let thresholdFilter = ThresholdFilter()
-//        thresholdFilter.setValue(blurImage, forKey: "inputImage")
         thresholdFilter.inputImage = coreImage
-        thresholdFilter.threshold = 0.24
-//        let thresholdImage = thresholdFilter.value(forKeyPath: "outputImage") as! CIImage
+        thresholdFilter.threshold = threshold
         let thresholdImage = thresholdFilter.outputImage!
-//        let thresholdImageRef = ciContext.createCGImage(thresholdImage, from: thresholdImage.extent)
         
         // trying to invert after thresholdImageRef is created
         let invertFilter = CIFilter(name: "CIColorInvert")!

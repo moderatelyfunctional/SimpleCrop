@@ -1,5 +1,5 @@
 //
-//  SimpleView.swift
+//  SimpleSlider.swift
 //  SimpleCrop
 //
 //  Created by Jing Lin on 3/2/19.
@@ -8,26 +8,20 @@
 
 import UIKit
 
-class SimpleView: UIView {
+class SimpleSlider: UISlider {
     
     init() {
         super.init(frame: .zero)
-
-        self.backgroundColor = Cons.cropColor
+        self.translatesAutoresizingMaskIntoConstraints = false
         
-        self.hide()
+        self.minimumValue = 0.05
+        self.maximumValue = 0.95
+        self.isContinuous = true
+        self.value = Cons.thresholdStart
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func hide() {
-        self.isHidden = true
-    }
-    
-    func show() {
-        self.isHidden = false
     }
     
 }

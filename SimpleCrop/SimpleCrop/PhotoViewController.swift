@@ -10,18 +10,26 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     
+    let slider = SimpleSlider()
+    
+    let photo:UIImage
     let photoView:SimpleImageView
     let photoContainer = SimpleScrollView(height: 0.84)
     let takePhotoButton = SimpleButton(text: "Take Photo", font: UIFont.systemFont(ofSize: 30))
     
+    var updateThreshold:Bool = false
+    var currentThreshold:Float = 0
+    
     init() {
-        self.photoView = SimpleImageView(image: UIImage(named: "test"))
+        self.photo = UIImage(named: "test")!
+        self.photoView = SimpleImageView(image: self.photo)
 
         super.init(nibName: nil, bundle: nil)
     }
     
     init(photo: UIImage) {
-        let inverted_photo = photo.invertColors()
+        self.photo = photo
+        let inverted_photo = self.photo.invertColors(threshold: Cons.thresholdStart)
         
         self.photoView = SimpleImageView(image: inverted_photo)
         super.init(nibName: nil, bundle: nil)
@@ -36,10 +44,12 @@ class PhotoViewController: UIViewController {
         
         self.photoContainer.delegate = self
         
+        self.slider.addTarget(self, action: #selector(PhotoViewController.adjustPhotoThreshold), for: .valueChanged)
         self.takePhotoButton.addTarget(self, action: #selector(PhotoViewController.takeAnotherPhoto), for: .touchUpInside)
         
         self.photoContainer.addSubview(self.photoView)
         self.view.addSubview(self.photoContainer)
+        self.view.addSubview(self.slider)
         self.view.addSubview(self.takePhotoButton)
         
         self.photoContainer.accessibilityLabel = "DO YOU WANT TO ZOOM IN THE IMAGE?"
@@ -56,14 +66,29 @@ class PhotoViewController: UIViewController {
         self.photoContainer.addConstraint(SConstraint.fillXConstraints(view: self.photoView, widthRatio: 1.0))
         self.photoContainer.addConstraint(SConstraint.fillYConstraints(view: self.photoView, heightRatio: 1.0))
         
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.slider, sides: [.left, .right], padding: 20))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.slider, heightRatio: 0.1))
+        self.view.addConstraint(SConstraint.verticalSpacingConstraint(upperView: self.slider, lowerView: self.takePhotoButton, spacing: 20))
+        
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.takePhotoButton, sides: [.left, .bottom, .right], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.takePhotoButton, heightRatio: 0.16))
     }
     
     @objc func takeAnotherPhoto() {
-        // rejectPhoto behaves differently depending on whether there's an active crop selection
         self.dismiss(animated: true, completion: nil)
-        // remove the active crop here
+    }
+    
+    @objc func adjustPhotoThreshold(sender: UISlider) {
+        self.currentThreshold = sender.value
+        if self.updateThreshold {
+            return
+        }
+        self.updateThreshold = true
+//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+//            let updated_photo = self.photo.invertColors(threshold: self.currentThreshold)
+//            self.photoView.image = updated_photo
+//            self.updateThreshold = false
+//        }
     }
     
 }
