@@ -13,18 +13,24 @@ class CropViewController: UIViewController {
 
     let captureSession = AVCaptureSession()
     let previewView = PreviewView()
+    let takePhoto = SimpleView(text: "Take Photo")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.addSubview(self.previewView)
+        self.view.addSubview(self.takePhoto)
         addConstraints()
         
         checkAuthorizationStatus()
     }
     
     func addConstraints() {
-        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .bottom, .right], padding: 0))
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .right], padding: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.previewView, heightRatio: 0.8))
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.takePhoto, sides: [.bottom, .left, .right], padding: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.takePhoto, heightRatio: 0.2))
+        
     }
     
     func checkAuthorizationStatus() {
