@@ -8,6 +8,38 @@
 import UIKit
 
 extension UIImage {
+    
+//    CIFilter* filter = [CIFilter filterWithName:@"CIColorInvert"];
+//    [filter setDefaults];
+//    [filter setValue:ciImage forKey:@"inputImage"];
+//    CIImage* output = [filter valueForKey:@"outputImage"];
+//
+//    NSRect centeredRect = NSMakeRect(0, 0, 0, 0);
+//    centeredRect = NSMakeRect(0, 0, [drawnImage size].width, [drawnImage size].height);
+//
+//    // align left if we have a title
+//    if(self.attributedTitle) {
+//    centeredRect.origin.x = 2;
+//    }
+//    else
+//    centeredRect.origin.x = NSMidX([self bounds]) - ([drawnImage size].width / 2);
+//
+//    centeredRect.origin.y = NSMidY([self bounds]) - ([drawnImage size].height / 2) - 1;
+//    centeredRect = NSIntegralRect(centeredRect);
+//    [output drawInRect:centeredRect fromRect:NSRectFromCGRect([output extent]) operation:NSCompositeSourceOut fraction:0.75f];
+
+    func invertColors() -> UIImage {
+        let ciContext = CIContext(options: nil)
+        let coreImage = CIImage(image: self)
+
+        let filter = CIFilter(name: "CIColorInvert")!
+        filter.setValue(coreImage, forKey: "inputImage")
+        let invertedImage = filter.value(forKeyPath: "outputImage") as! CIImage
+        let filteredImageRef = ciContext.createCGImage(invertedImage, from: invertedImage.extent)
+
+        return UIImage(cgImage: filteredImageRef!, scale: self.scale, orientation: self.imageOrientation)
+    }
+    
     func rad(_ degree: Double) -> CGFloat {
         return CGFloat(degree / 180.0 * .pi)
     }

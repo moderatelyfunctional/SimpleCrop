@@ -21,7 +21,9 @@ class PhotoViewController: UIViewController {
     var cropRect = CGRect.zero
     
     init(photo: UIImage) {
-        self.photoView = SimpleImageView(image: photo)
+        let inverted_photo = photo.invertColors()
+        
+        self.photoView = SimpleImageView(image: inverted_photo)
         super.init(nibName: nil, bundle: nil)
 
         let touchRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PhotoViewController.cropImage))
