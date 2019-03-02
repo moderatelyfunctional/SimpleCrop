@@ -61,11 +61,11 @@ extension UIImage {
         thresholdFilter.threshold = 0.24
 //        let thresholdImage = thresholdFilter.value(forKeyPath: "outputImage") as! CIImage
         let thresholdImage = thresholdFilter.outputImage!
-        let thresholdImageRef = ciContext.createCGImage(thresholdImage, from: thresholdImage.extent)
+//        let thresholdImageRef = ciContext.createCGImage(thresholdImage, from: thresholdImage.extent)
         
         // trying to invert after thresholdImageRef is created
         let invertFilter = CIFilter(name: "CIColorInvert")!
-        invertFilter.setValue(thresholdImageRef, forKey: "inputImage")
+        invertFilter.setValue(thresholdImage, forKey: "inputImage")
         let invertedImage = invertFilter.value(forKeyPath: "outputImage") as! CIImage
         let invertedImageRef = ciContext.createCGImage(invertedImage, from: invertedImage.extent)
         

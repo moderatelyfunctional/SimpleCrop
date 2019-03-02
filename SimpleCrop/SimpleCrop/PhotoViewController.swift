@@ -11,6 +11,7 @@ import UIKit
 class PhotoViewController: UIViewController {
     
     let photoView:SimpleImageView
+    let photoContainer = SimpleScrollView(height: 0.84)
     let acceptButton = SimpleButton(action: .Accept)
     let rejectButton = SimpleButton(action: .Reject)
     
@@ -63,10 +64,13 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.photoContainer.delegate = self
+        
         self.rejectButton.addTarget(self, action: #selector(PhotoViewController.rejectPhoto), for: .touchUpInside)
         self.acceptButton.addTarget(self, action: #selector(PhotoViewController.acceptPhoto), for: .touchUpInside)
         
-        self.view.addSubview(self.photoView)
+        self.photoContainer.addSubview(self.photoView)
+        self.view.addSubview(self.photoContainer)
         self.view.addSubview(self.acceptButton)
         self.view.addSubview(self.rejectButton)
         self.view.addSubview(self.cropView)
@@ -78,13 +82,12 @@ class PhotoViewController: UIViewController {
         self.acceptButton.accessibilityHint = "Click to save the crop"
         
         self.rejectButton.accessibilityLabel = "REJECT BUTTON ON LEFT"
-        self.rejectButton.accessibilityHint = "Click to cancel and crop gain"
+        self.rejectButton.accessibilityHint = "Click to cancel and crop again"
         addConstraints()
     }
     
     func addConstraints() {
-        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoView, sides: [.left, .top, .right], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.photoView, heightRatio: 0.84))
+        self.photoContainer.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoView, sides: [.left, .top, .right, .bottom], padding: 0))
         
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.rejectButton, sides: [.left, .bottom], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.rejectButton, heightRatio: 0.16))
@@ -135,6 +138,14 @@ class PhotoViewController: UIViewController {
         
         self.cropView.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         self.cropView.center = CGPoint(x: min_x + width / 2, y: min_y + height / 2)
+    }
+    
+}
+
+extension PhotoViewController: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.photoView
     }
     
 }

@@ -20,6 +20,7 @@
 		DC8BDAE0222A6098006E1D3D /* SimpleImageVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDADF222A6098006E1D3D /* SimpleImageVIew.swift */; };
 		DC8BDAE5222A701B006E1D3D /* SimpleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAE4222A701B006E1D3D /* SimpleView.swift */; };
 		DC988AE0222AF54F00118D82 /* ThresholdFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC988ADF222AF54E00118D82 /* ThresholdFilter.swift */; };
+		DC988AE2222B229900118D82 /* SimpleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC988AE1222B229900118D82 /* SimpleScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		DC8BDADF222A6098006E1D3D /* SimpleImageVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleImageVIew.swift; sourceTree = "<group>"; };
 		DC8BDAE4222A701B006E1D3D /* SimpleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleView.swift; sourceTree = "<group>"; };
 		DC988ADF222AF54E00118D82 /* ThresholdFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdFilter.swift; sourceTree = "<group>"; };
+		DC988AE1222B229900118D82 /* SimpleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		DC8BDAE1222A60D5006E1D3D /* AutoElements */ = {
 			isa = PBXGroup;
 			children = (
+				DC988AE1222B229900118D82 /* SimpleScrollView.swift */,
 				DC8BDAE4222A701B006E1D3D /* SimpleView.swift */,
 				DC8BDAD7222A4CAA006E1D3D /* SimpleButton.swift */,
 				DC8BDADF222A6098006E1D3D /* SimpleImageVIew.swift */,
@@ -171,6 +174,7 @@
 				DC8BDAE5222A701B006E1D3D /* SimpleView.swift in Sources */,
 				DC8BDAE0222A6098006E1D3D /* SimpleImageVIew.swift in Sources */,
 				DC8BDAD8222A4CAA006E1D3D /* SimpleButton.swift in Sources */,
+				DC988AE2222B229900118D82 /* SimpleScrollView.swift in Sources */,
 				DC988AE0222AF54F00118D82 /* ThresholdFilter.swift in Sources */,
 				DC8BDADC222A4DBB006E1D3D /* Extensions.swift in Sources */,
 				DC8BDAC2222A2498006E1D3D /* AppDelegate.swift in Sources */,
