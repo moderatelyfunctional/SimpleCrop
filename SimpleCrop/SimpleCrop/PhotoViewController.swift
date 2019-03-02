@@ -23,6 +23,10 @@ class PhotoViewController: UIViewController {
     init(photo: UIImage) {
         self.photoView = SimpleImageView(image: photo)
         super.init(nibName: nil, bundle: nil)
+
+        let touchRecognizer = UIPanGestureRecognizer(target: self, action: #selector(PhotoViewController.cropImage))
+        self.photoView.isUserInteractionEnabled = true
+        self.photoView.addGestureRecognizer(touchRecognizer)
     }
     
     init() {
@@ -58,7 +62,7 @@ class PhotoViewController: UIViewController {
         super.viewDidLoad()
         
         self.rejectButton.addTarget(self, action: #selector(PhotoViewController.rejectPhoto), for: .touchUpInside)
-        self.acceptButton.addTarget(self, action: #selector(PhotoViewController.finishedSavingImage), for: .touchUpInside)
+        self.acceptButton.addTarget(self, action: #selector(PhotoViewController.acceptPhoto), for: .touchUpInside)
         
         self.view.addSubview(self.photoView)
         self.view.addSubview(self.acceptButton)
@@ -97,15 +101,65 @@ class PhotoViewController: UIViewController {
             return
         }
         // crop and then save the image
-        guard let croppedImage = self.photoView.image?.crop(rect: self.cropRect) else {
+//        let crop_view = self.cropView.frame
+        
+//        let cropZone = CGRect(x: crop_view.origin.x * (self.photoView.image?.scale)!,
+//                              y: crop_view.origin.y * (self.photoView.image?.scale)!,
+//                              width: crop_view.size.width * (self.photoView.image?.scale)!,
+//                              height: crop_view.size.height * ( self.photoView.image?.scale)!)
+        
+//        let other = CGRect(x: 0, y: 234, width: 80, height: 43)
+        
+//        let imageRef = self.photoView.image?.cgImage!.cropping(to: cropZone)
+//        let croppedImage = UIImage(cgImage: imageRef!, scale: self.photoView.image!.scale, orientation: self.photoView.image!.imageOrientation)
+
+        guard let croppedImage = self.photoView.image!.crop(toRect: self.cropView.frame, viewWidth: self.photoView.bounds.width, viewHeight: self.photoView.bounds.height) else {
             return
         }
         
+//        guard let croppedImage = cropOutputImage(self.photoView.image!, toRect: self.cropView.frame, viewWidth: self.photoView.bounds.width, viewHeight: self.photoView.bounds.height) else {
+//            return
+//        }
+//        let croppedImage = otherCrop(self.photoView.image!, cropRect: self.cropView.frame)
         UIImageWriteToSavedPhotosAlbum(croppedImage, self, #selector(PhotoViewController.finishedSavingImage), nil)
+//        UIImageWriteToSavedPhotosAlbum(self.photoView.image!, self, #selector(PhotoViewController.finishedSavingImage), nil)
     }
     
-    @objc func finishedSavingImage() {
-        let alert = UIAlertController(title: "Saved your photo!", message: "SimpleCrop saved your photo to the albums", preferredStyle: .alert)
+    func otherCrop(_ image: UIImage, cropRect: CGRect) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(cropRect.size, false, image.scale)
+        image.draw(at: CGPoint(x: -cropRect.origin.x, y: -cropRect.origin.y))
+        let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
+        return croppedImage!
+    }
+    
+    func rad(_ degree: Double) -> CGFloat {
+        return CGFloat(degree / 180.0 * .pi)
+    }
+    
+//    func cropOutputImage(_ inputImage: UIImage, toRect cropRect: CGRect, viewWidth: CGFloat, viewHeight: CGFloat) -> UIImage? {
+//
+//        let imageViewScale = max(inputImage.size.width / viewWidth,
+//                                 inputImage.size.height / viewHeight)
+//
+//        // Scale cropRect to handle images larger than shown-on-screen size
+//        let cropZone = CGRect(x:cropRect.origin.x * imageViewScale,
+//                              y:cropRect.origin.y * imageViewScale,
+//                              width:cropRect.size.width * imageViewScale,
+//                              height:cropRect.size.height * imageViewScale)
+//
+//        // Perform cropping in Core Graphics
+//        guard let cutImageRef: CGImage = inputImage.cgImage?.cropping(to:cropZone)
+//            else {
+//                return nil
+//        }
+//
+//        // Return image to UIImage
+//        let croppedImage: UIImage = UIImage(cgImage: cutImageRef, scale: inputImage.scale, orientation: inputImage.imageOrientation)
+//        return croppedImage
+//    }
+    
+    @objc func finishedSavingImage(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        let alert = UIAlertController(title: "Saved your photo.", message: "SimpleCrop saved your photo to the albums", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay.", style: .default, handler: nil))
         
         self.present(alert, animated: true)
@@ -124,7 +178,7 @@ class PhotoViewController: UIViewController {
         
         self.cropView.center = CGPoint(x: min_x + width / 2, y: min_y + y_down * height / 2)
         
-        self.cropRect = CGRect(x: min_x, y: min_y, width: width, height: height)
+//        self.cropRect = CGRect(x: min_x, y: min_y, width: width, height: height)
     }
     
 }
