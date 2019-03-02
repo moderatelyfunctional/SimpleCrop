@@ -32,11 +32,16 @@ extension UIImage {
         let ciContext = CIContext(options: nil)
         let coreImage = CIImage(image: self)
 
-        let filter = CIFilter(name: "CIColorInvert")!
-        filter.setValue(coreImage, forKey: "inputImage")
-        let invertedImage = filter.value(forKeyPath: "outputImage") as! CIImage
-        let filteredImageRef = ciContext.createCGImage(invertedImage, from: invertedImage.extent)
-
+        let invertFilter = CIFilter(name: "CIColorInvert")!
+        invertFilter.setValue(coreImage, forKey: "inputImage")
+        let invertedImage = invertFilter.value(forKeyPath: "outputImage") as! CIImage
+//        let filteredImageRef = ciContext.createCGImage(invertedImage, from: invertedImage.extent)
+        let colorFilter = CIFilter(name: "CIColorControls")!
+        colorFilter.setValue(invertedImage, forKey: "inputImage")
+        colorFilter.setValue(1.05, forKey: "inputContrast")
+        let colorImage = colorFilter.value(forKeyPath: "outputImage") as! CIImage
+        let filteredImageRef = ciContext.createCGImage(colorImage, from: invertedImage.extent)
+        
         return UIImage(cgImage: filteredImageRef!, scale: self.scale, orientation: self.imageOrientation)
     }
     
