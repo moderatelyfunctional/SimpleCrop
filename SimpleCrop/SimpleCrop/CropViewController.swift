@@ -27,10 +27,9 @@ class CropViewController: UIViewController {
     
     func addConstraints() {
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .right], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.previewView, heightRatio: 0.8))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.previewView, heightRatio: 0.84))
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.takePhoto, sides: [.bottom, .left, .right], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.takePhoto, heightRatio: 0.2))
-        
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.takePhoto, heightRatio: 0.16))
     }
     
     func checkAuthorizationStatus() {
@@ -52,6 +51,7 @@ class CropViewController: UIViewController {
     
     func setupCaptureSession() {
         configureSession()
+        configurePreview()
         runSession()
     }
     
@@ -71,12 +71,18 @@ class CropViewController: UIViewController {
         captureSession.sessionPreset = .photo
         captureSession.addOutput(photoOutput)
         self.captureSession.commitConfiguration()
-        
+    }
+    
+    func configurePreview() {
         self.previewView.videoPreviewLayer.session = self.captureSession
+        self.previewView.videoPreviewLayer.videoGravity = .resizeAspectFill
     }
     
     func runSession() {
-        self.captureSession.startRunning()
+        DispatchQueue.main.async {
+            self.captureSession.startRunning()
+        }
+        
     }
 
 }
