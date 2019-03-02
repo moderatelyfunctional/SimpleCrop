@@ -15,7 +15,7 @@ class PreviewView: UIView {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        self.backgroundColor = UIColor.magenta
+        self.backgroundColor = UIColor.black
     }
     
     required init?(coder aDecoder: NSCoder) {

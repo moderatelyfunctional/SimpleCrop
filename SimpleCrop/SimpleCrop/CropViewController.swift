@@ -17,13 +17,36 @@ class CropViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         self.view.addSubview(self.previewView)
         addConstraints()
+        
+        checkAuthorizationStatus()
     }
     
     func addConstraints() {
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .bottom, .right], padding: 0))
+    }
+    
+    func checkAuthorizationStatus() {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+        case .authorized: // The user previously granted access to the camera
+            self.setupCaptureSession()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if (granted) {
+                    self.setupCaptureSession()
+                }
+            }
+        case .denied:
+            return
+        case .restricted:
+            return
+        }
+    }
+    
+    func setupCaptureSession() {
+        configureSession()
+        runSession()
     }
     
     func configureSession() {
@@ -42,29 +65,13 @@ class CropViewController: UIViewController {
         captureSession.sessionPreset = .photo
         captureSession.addOutput(photoOutput)
         self.captureSession.commitConfiguration()
-    }
-    
-    func checkAuthorizationStatus() {
-        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
-            case .authorized: // The user previously granted access to the camera
-                self.setupCaptureSession()
-            case .notDetermined:
-                AVCaptureDevice.requestAccess(for: .video) { granted in
-                    if (granted) {
-                        self.setupCaptureSession()
-                    }
-                }
-            case .denied:
-                return
-            case .restricted:
-                return
-        }
-    }
-    
-    func setupCaptureSession() {
         
+        self.previewView.videoPreviewLayer.session = self.captureSession
     }
-
+    
+    func runSession() {
+        self.captureSession.startRunning()
+    }
 
 }
 
