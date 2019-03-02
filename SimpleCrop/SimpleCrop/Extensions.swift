@@ -63,7 +63,13 @@ extension UIImage {
         let thresholdImage = thresholdFilter.outputImage!
         let thresholdImageRef = ciContext.createCGImage(thresholdImage, from: thresholdImage.extent)
         
-        return UIImage(cgImage: thresholdImageRef!, scale: self.scale, orientation: self.imageOrientation)
+        // trying to invert after thresholdImageRef is created
+        let invertFilter = CIFilter(name: "CIColorInvert")!
+        invertFilter.setValue(thresholdImageRef, forKey: "inputImage")
+        let invertedImage = invertFilter.value(forKeyPath: "outputImage") as! CIImage
+        let invertedImageRef = ciContext.createCGImage(invertedImage, from: invertedImage.extent)
+        
+        return UIImage(cgImage: invertedImageRef!, scale: self.scale, orientation: self.imageOrientation)
     }
     
     func rad(_ degree: Double) -> CGFloat {
