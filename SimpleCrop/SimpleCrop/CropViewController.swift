@@ -32,6 +32,7 @@ class CropViewController: UIViewController {
     func addConstraints() {
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .right], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.previewView, heightRatio: 0.84))
+        
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoButton, sides: [.bottom, .left, .right], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.photoButton, heightRatio: 0.16))
     }

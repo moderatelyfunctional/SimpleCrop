@@ -33,12 +33,13 @@ class SimpleButton: UIButton {
         
         if action == .Accept {
             self.setImage(UIImage(named: "check"), for: .normal)
+            self.backgroundColor = UIColor.green
         } else {
             self.setImage(UIImage(named: "cross"), for: .normal)
+            self.backgroundColor = UIColor.red
         }
         self.imageView?.contentMode = .scaleAspectFit
-        
-        self.backgroundColor = Cons.primaryBackground
+        self.imageEdgeInsets = UIEdgeInsets(top: 20, left: 40, bottom: 20, right: 40)
     }
     
     required init?(coder aDecoder: NSCoder) {
