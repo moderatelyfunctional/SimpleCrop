@@ -84,11 +84,11 @@ class PhotoViewController: UIViewController {
             return
         }
         self.updateThreshold = true
-//        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-//            let updated_photo = self.photo.invertColors(threshold: self.currentThreshold)
-//            self.photoView.image = updated_photo
-//            self.updateThreshold = false
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            let updated_photo = self.photo.invertColors(threshold: self.currentThreshold)
+            self.photoView.image = updated_photo
+            self.updateThreshold = false
+        }
     }
     
 }
