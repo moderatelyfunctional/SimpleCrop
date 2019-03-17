@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DC8BDABD222A2498006E1D3D"
-               BuildableName = "SimpleCrop.app"
-               BlueprintName = "SimpleCrop"
-               ReferencedContainer = "container:SimpleCrop.xcodeproj">
+               BuildableName = "SimpleContrast.app"
+               BlueprintName = "SimpleContrast"
+               ReferencedContainer = "container:SimpleContrast.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC8BDABD222A2498006E1D3D"
-            BuildableName = "SimpleCrop.app"
-            BlueprintName = "SimpleCrop"
-            ReferencedContainer = "container:SimpleCrop.xcodeproj">
+            BuildableName = "SimpleContrast.app"
+            BlueprintName = "SimpleContrast"
+            ReferencedContainer = "container:SimpleContrast.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC8BDABD222A2498006E1D3D"
-            BuildableName = "SimpleCrop.app"
-            BlueprintName = "SimpleCrop"
-            ReferencedContainer = "container:SimpleCrop.xcodeproj">
+            BuildableName = "SimpleContrast.app"
+            BlueprintName = "SimpleContrast"
+            ReferencedContainer = "container:SimpleContrast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC8BDABD222A2498006E1D3D"
-            BuildableName = "SimpleCrop.app"
-            BlueprintName = "SimpleCrop"
-            ReferencedContainer = "container:SimpleCrop.xcodeproj">
+            BuildableName = "SimpleContrast.app"
+            BlueprintName = "SimpleContrast"
+            ReferencedContainer = "container:SimpleContrast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
