@@ -1,4 +1,4 @@
-# Simple Vision
+# Simple Contrast
 
 ### Introduction
 
