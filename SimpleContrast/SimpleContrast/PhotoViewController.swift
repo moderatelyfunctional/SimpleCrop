@@ -15,7 +15,7 @@ class PhotoViewController: UIViewController {
     let photo:UIImage
     let photoView:SimpleImageView
     let photoContainer = SimpleScrollView(height: 0.84)
-    let takePhotoButton = SimpleButton(text: "Take Photo", font: UIFont.systemFont(ofSize: 30))
+    let takePhotoButton = SimpleButton(text: "Take Photo")
     
     var updateThreshold:Bool = false
     var currentThreshold:Float = 0

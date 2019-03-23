@@ -1,6 +1,6 @@
 //
-//  CropViewController.swift
-//  SimpleCrop
+//  ContrastViewController.swift
+//  SimpleContrast
 //
 //  Created by Jing Lin on 3/1/19.
 //  Copyright © 2019 Jing Lin. All rights reserved.
@@ -9,10 +9,16 @@
 import UIKit
 import AVFoundation
 
-class CropViewController: UIViewController {
+class ContrastViewController: UIViewController {
 
     let previewView = PreviewView()
+    let flashButton = SimpleButton(
+        text: "Turn Flash OFF",
+        font: UIFont.systemFont(ofSize: 24),
+        backgroundColor: Cons.secondaryBackground)
     let photoButton = SimpleButton(text: "Take Photo")
+    
+    var useFlash:Bool = true
     
     let captureSession = AVCaptureSession()
     let photoOutput = AVCapturePhotoOutput()
@@ -20,13 +26,17 @@ class CropViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.photoButton.addTarget(self, action: #selector(CropViewController.takePhoto), for: .touchUpInside)
-        self.view.accessibilityLabel = "SIMPLE CROP"
+        self.flashButton.addTarget(self, action: #selector(ContrastViewController.toggleFlash), for: .touchUpInside)
+        self.photoButton.addTarget(self, action: #selector(ContrastViewController.takePhoto), for: .touchUpInside)
+        
+        self.view.accessibilityLabel = "SIMPLE CONTRAST"
         
         self.view.addSubview(self.previewView)
-        self.previewView.accessibilityLabel = "CAMERA FEED"
-        
+        self.view.addSubview(self.flashButton)
         self.view.addSubview(self.photoButton)
+        
+        self.previewView.accessibilityLabel = "CAMERA FEED"
+        self.flashButton.accessibilityLabel = "TOGGLE FLASH"
         self.photoButton.accessibilityLabel = "TAKE A PHOTO"
         addConstraints()
         
@@ -37,8 +47,12 @@ class CropViewController: UIViewController {
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.previewView, sides: [.top, .left, .right], padding: 0))
         self.view.addConstraint(SConstraint.fillYConstraints(view: self.previewView, heightRatio: 0.84))
         
+        self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.flashButton, sides: [.left, .right], padding: 0))
+        self.view.addConstraint(SConstraint.verticalSpacingConstraint(upperView: self.previewView, lowerView: self.flashButton, spacing: 0))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.flashButton, heightRatio: 0.07))
+        
         self.view.addConstraints(SConstraint.paddingPositionConstraints(view: self.photoButton, sides: [.bottom, .left, .right], padding: 0))
-        self.view.addConstraint(SConstraint.fillYConstraints(view: self.photoButton, heightRatio: 0.16))
+        self.view.addConstraint(SConstraint.fillYConstraints(view: self.photoButton, heightRatio: 0.09))
     }
     
     func checkAuthorizationStatus() {
@@ -51,7 +65,6 @@ class CropViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.setupCaptureSession()
                     }
-//                    self.setupCaptureSession()
                 }
             }
         case .denied:
@@ -97,17 +110,24 @@ class CropViewController: UIViewController {
         }
     }
     
+    @objc func toggleFlash() {
+        self.useFlash = !self.useFlash
+        let flashText = self.useFlash ? "Turn Flash OFF" : "Turn Flash ON"
+        self.flashButton.setTitle(flashText, for: .normal)
+    }
+    
     @objc func takePhoto() {
         let photoSettings = AVCapturePhotoSettings()
         photoSettings.isAutoStillImageStabilizationEnabled = true
         photoSettings.isHighResolutionPhotoEnabled = true
-        photoSettings.flashMode = .on
+        photoSettings.flashMode = self.useFlash ? .on : .off
         
         self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
+
 }
 
-extension CropViewController: AVCapturePhotoCaptureDelegate {
+extension ContrastViewController: AVCapturePhotoCaptureDelegate {
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let _ = error {

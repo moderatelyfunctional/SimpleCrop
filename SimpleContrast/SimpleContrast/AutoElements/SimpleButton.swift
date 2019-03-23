@@ -15,20 +15,20 @@ class SimpleButton: UIButton {
         case Reject
     }
     
-    init(text: String, font: UIFont) {
+    init(text: String, font: UIFont, backgroundColor: UIColor) {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         
         self.setTitle(text, for: .normal)
-        self.titleLabel!.font = UIFont.systemFont(ofSize: 48, weight: .regular)
+        self.titleLabel!.font = font
         
         self.setTitleColor(Cons.primaryColor, for: .normal)
-        self.backgroundColor = Cons.primaryBackground
+        self.backgroundColor = backgroundColor
     }
     
     convenience init(text: String) {
-        let font = UIFont.systemFont(ofSize: 48, weight: .regular)
-        self.init(text: text, font: font)
+        let font = UIFont.systemFont(ofSize: 40, weight: .regular)
+        self.init(text: text, font: font, backgroundColor: Cons.primaryBackground)
     }
 
     

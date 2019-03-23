@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC8BDAC2222A2498006E1D3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAC1222A2498006E1D3D /* AppDelegate.swift */; };
-		DC8BDAC4222A2498006E1D3D /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAC3222A2498006E1D3D /* CropViewController.swift */; };
+		DC8BDAC4222A2498006E1D3D /* ContrastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAC3222A2498006E1D3D /* ContrastViewController.swift */; };
 		DC8BDAC9222A2499006E1D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8BDAC8222A2499006E1D3D /* Assets.xcassets */; };
 		DC8BDACC222A2499006E1D3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8BDACA222A2499006E1D3D /* LaunchScreen.storyboard */; };
 		DC8BDAD4222A45D9006E1D3D /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAD3222A45D9006E1D3D /* PreviewView.swift */; };
@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		DC8BDABE222A2498006E1D3D /* SimpleContrast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleContrast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8BDAC1222A2498006E1D3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DC8BDAC3222A2498006E1D3D /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
+		DC8BDAC3222A2498006E1D3D /* ContrastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastViewController.swift; sourceTree = "<group>"; };
 		DC8BDAC8222A2499006E1D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC8BDACB222A2499006E1D3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC8BDACD222A2499006E1D3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 				DC988ADF222AF54E00118D82 /* ThresholdFilter.swift */,
 				DC8BDAD9222A4CE0006E1D3D /* Constants.swift */,
 				DC8BDAD5222A46C1006E1D3D /* SConstraint.swift */,
-				DC8BDAC3222A2498006E1D3D /* CropViewController.swift */,
+				DC8BDAC3222A2498006E1D3D /* ContrastViewController.swift */,
 				DC8BDADD222A5EC0006E1D3D /* PhotoViewController.swift */,
 				DC8BDAC8222A2499006E1D3D /* Assets.xcassets */,
 				DC8BDACA222A2499006E1D3D /* LaunchScreen.storyboard */,
@@ -170,7 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC8BDAD6222A46C1006E1D3D /* SConstraint.swift in Sources */,
-				DC8BDAC4222A2498006E1D3D /* CropViewController.swift in Sources */,
+				DC8BDAC4222A2498006E1D3D /* ContrastViewController.swift in Sources */,
 				DC8BDAE0222A6098006E1D3D /* SimpleImageVIew.swift in Sources */,
 				DC8BDAD8222A4CAA006E1D3D /* SimpleButton.swift in Sources */,
 				DC988AE2222B229900118D82 /* SimpleScrollView.swift in Sources */,
