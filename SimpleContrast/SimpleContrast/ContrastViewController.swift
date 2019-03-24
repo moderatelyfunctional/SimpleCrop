@@ -12,6 +12,7 @@ import AVFoundation
 class ContrastViewController: UIViewController {
 
     let previewView = PreviewView()
+    var videoDevice:AVCaptureDevice!
     let flashButton = SimpleButton(
         text: "Turn Flash OFF",
         font: UIFont.systemFont(ofSize: 24),
@@ -26,6 +27,8 @@ class ContrastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(ContrastViewController.scrollVideo))
+        self.previewView.addGestureRecognizer(pinchRecognizer)
         self.flashButton.addTarget(self, action: #selector(ContrastViewController.toggleFlash), for: .touchUpInside)
         self.photoButton.addTarget(self, action: #selector(ContrastViewController.takePhoto), for: .touchUpInside)
         
@@ -82,10 +85,10 @@ class ContrastViewController: UIViewController {
     
     func configureSession() {
         self.captureSession.beginConfiguration()
-        let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+        self.videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
         
         guard
-            let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice!),
+            let videoDeviceInput = try? AVCaptureDeviceInput(device: self.videoDevice!),
             self.captureSession.canAddInput(videoDeviceInput)
             else { return }
         
@@ -107,6 +110,25 @@ class ContrastViewController: UIViewController {
     func runSession() {
         DispatchQueue.main.async {
             self.captureSession.startRunning()
+        }
+    }
+    
+    @objc func scrollVideo(_ sender: UIPinchGestureRecognizer) {
+        guard let device = self.videoDevice else { return }
+        
+        if sender.state == .changed {
+            let maxZoomFactor = device.activeFormat.videoMaxZoomFactor
+            let pinchVelocityDividerFactor:CGFloat = 5.0
+            
+            do {
+                try device.lockForConfiguration()
+                defer { device.unlockForConfiguration() }
+                
+                let desiredZoomFactor = device.videoZoomFactor + atan2(sender.velocity, pinchVelocityDividerFactor)
+                device.videoZoomFactor = max(1.0, min(desiredZoomFactor, maxZoomFactor))
+            } catch {
+                print(error)
+            }
         }
     }
     
