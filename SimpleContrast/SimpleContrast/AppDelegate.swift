@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  SimpleCrop
+//  SimpleContrast
 //
 //  Created by Jing Lin on 3/1/19.
 //  Copyright © 2019 Jing Lin. All rights reserved.

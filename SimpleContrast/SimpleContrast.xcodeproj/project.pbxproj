@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC34179822512C9D00AD4F73 /* SimpleZoomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC34179722512C9D00AD4F73 /* SimpleZoomSlider.swift */; };
 		DC8BDAC2222A2498006E1D3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAC1222A2498006E1D3D /* AppDelegate.swift */; };
 		DC8BDAC4222A2498006E1D3D /* ContrastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8BDAC3222A2498006E1D3D /* ContrastViewController.swift */; };
 		DC8BDAC9222A2499006E1D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8BDAC8222A2499006E1D3D /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC34179722512C9D00AD4F73 /* SimpleZoomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleZoomSlider.swift; sourceTree = "<group>"; };
 		DC8BDABE222A2498006E1D3D /* SimpleContrast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleContrast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8BDAC1222A2498006E1D3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC8BDAC3222A2498006E1D3D /* ContrastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				DC988AE3222B35A000118D82 /* SimpleSlider.swift */,
+				DC34179722512C9D00AD4F73 /* SimpleZoomSlider.swift */,
 				DC988AE1222B229900118D82 /* SimpleScrollView.swift */,
 				DC8BDAD7222A4CAA006E1D3D /* SimpleButton.swift */,
 				DC8BDADF222A6098006E1D3D /* SimpleImageVIew.swift */,
@@ -172,6 +175,7 @@
 				DC8BDAD6222A46C1006E1D3D /* SConstraint.swift in Sources */,
 				DC8BDAC4222A2498006E1D3D /* ContrastViewController.swift in Sources */,
 				DC8BDAE0222A6098006E1D3D /* SimpleImageVIew.swift in Sources */,
+				DC34179822512C9D00AD4F73 /* SimpleZoomSlider.swift in Sources */,
 				DC8BDAD8222A4CAA006E1D3D /* SimpleButton.swift in Sources */,
 				DC988AE2222B229900118D82 /* SimpleScrollView.swift in Sources */,
 				DC988AE0222AF54F00118D82 /* ThresholdFilter.swift in Sources */,

@@ -1,6 +1,6 @@
 //
 //  SConstraint.swift
-//  SimpleCrop
+//  SimpleContrast
 //
 //  Created by Jiahao Li on 3/2/19.
 //  Copyright © 2019 Jiahao Li. All rights reserved.
